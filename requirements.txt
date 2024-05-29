@@ -1,0 +1,3 @@
+boxoffice_api
+beautifulsoup4
+requests
