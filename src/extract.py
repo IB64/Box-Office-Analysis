@@ -4,7 +4,7 @@ import datetime
 import pandas as pd
 from boxoffice_api import BoxOffice
 
-START_DATE = datetime.datetime(2023,12,1)
+START_DATE = datetime.datetime(2000,1,1)
 END_DATE = datetime.datetime(2024,1,1)
 
 
@@ -17,12 +17,15 @@ def extract_information(box_office: BoxOffice) -> pd.DataFrame:
     while date != END_DATE:
         # get information for the given day
         daily_data = box_office.get_daily(date.strftime("%Y-%m-%d"))
-        daily_data["date"] = date
 
-        # append information to a list of dataframes to concatenate later
-        data_frames.append(daily_data)
+        # skip if there's no data for given day
+        if daily_data is not None:
+            daily_data["date"] = date
 
-        print(f"Information for {date} gathered...")
+            # append information to a list of dataframes to concatenate later
+            data_frames.append(daily_data)
+
+            print(f"Information for {date} gathered...")
 
         # Go to the next day
         date += datetime.timedelta(days=1)
