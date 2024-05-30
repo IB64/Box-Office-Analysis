@@ -17,8 +17,8 @@ def extract_information(box_office: BoxOffice) -> pd.DataFrame:
     """
     # set up logging
     setup_logging()
-    logger = logging.getLogger(__name__)
-
+    logger = logging.getLogger()
+    
     date = START_DATE
     data_frames = []
 
