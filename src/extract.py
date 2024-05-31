@@ -7,7 +7,7 @@ from boxoffice_api import BoxOffice
 
 from log_config import setup_logging
 
-START_DATE = datetime.datetime(2023,12,1)
+START_DATE = datetime.datetime(2000,1,1)
 END_DATE = datetime.datetime(2024,1,1)
 
 
