@@ -29,19 +29,19 @@ if __name__ == "__main__":
     box_office = BoxOffice(outputformat="DF")
 
     # Extraction
-    combined_logger.info(f"Extraction Starting...")
+    combined_logger.info("Extraction Starting...")
     extraction_start_time = perf_counter()
     data = ex.extract_information(box_office)
-    combined_logger.info(f"Extraction Done! Time taken: {perf_counter() - extraction_start_time} seconds | Total time elapsed: {perf_counter() - start}")
+    combined_logger.info("Extraction Done! Time taken: %f seconds | Total time elapsed: %f", perf_counter() - extraction_start_time, perf_counter() - start)
 
     # Cleaning
-    combined_logger.info(f"Cleaning Starting...")
+    combined_logger.info("Cleaning Starting...")
     cleaning_start_time = perf_counter()
     clean_data = tr.clean(data)
-    combined_logger.info(f"Cleaning Done! Time taken: {perf_counter() - cleaning_start_time} seconds | Total time elapsed: {perf_counter() - start}")
+    combined_logger.info("Cleaning Done! Time taken: %f seconds | Total time elapsed: %f", perf_counter() - cleaning_start_time, perf_counter() - start)
 
     # Uploading
-    combined_logger.info(f"Uploading to csv file...")
+    combined_logger.info("Uploading to csv file...")
     upload(clean_data)
 
-    combined_logger.info(f"Process Done! Total time elapsed: {perf_counter() - start} seconds.")
+    combined_logger.info("Process Done! Total time elapsed: %f seconds.", perf_counter() - start)

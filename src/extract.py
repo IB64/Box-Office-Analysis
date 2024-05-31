@@ -19,7 +19,7 @@ def extract_information(box_office: BoxOffice) -> pd.DataFrame:
     setup_logging()
     console_logger = logging.getLogger("consoleLogger")
     combined_logger = logging.getLogger("combinedLogger")
-    
+
     date = START_DATE
     data_frames = []
 
@@ -30,22 +30,22 @@ def extract_information(box_office: BoxOffice) -> pd.DataFrame:
         try:
             daily_data = box_office.get_daily(date_as_string)
         except Exception as err:
-            combined_logger.error(f"Error for date '{date_as_string}' occurred: {str(err)}")
+            combined_logger.error("Error for date '%s' occurred: %s", date_as_string, str(err))
 
         # skip if there's no data for given day
         if daily_data is not None:
             daily_data["date"] = date
 
             # append information to a list of dataframes to concatenate later
-            console_logger.info(f"Information for '{date_as_string}' gathered...")
+            console_logger.info("Information for '%s' gathered...", date_as_string)
             data_frames.append(daily_data)
 
         else:
-            combined_logger.error(f"Skipped '{date_as_string}' due to error...")
+            combined_logger.error("Skipped '%s' due to error...", date_as_string)
 
         # Go to the next day
         date += datetime.timedelta(days=1)
-    
+
     # concatenate dataframes
     result = pd.concat(data_frames, ignore_index=True)
 
