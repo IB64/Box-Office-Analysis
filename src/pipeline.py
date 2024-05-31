@@ -22,26 +22,26 @@ def upload(data: pd.DataFrame) -> None:
 if __name__ == "__main__":
     # set up logging
     setup_logging()
-    logger = logging.getLogger()
+    combined_logger = logging.getLogger("combinedLogger")
 
-    logger.info("Starting Process...")
+    combined_logger.info("Starting Process...")
     start = perf_counter()
     box_office = BoxOffice(outputformat="DF")
 
     # Extraction
-    logger.info(f"Extraction Starting...")
+    combined_logger.info(f"Extraction Starting...")
     extraction_start_time = perf_counter()
     data = ex.extract_information(box_office)
-    logger.info(f"Extraction Done! Time taken: {perf_counter() - extraction_start_time} seconds | Total time elapsed: {perf_counter() - start}")
+    combined_logger.info(f"Extraction Done! Time taken: {perf_counter() - extraction_start_time} seconds | Total time elapsed: {perf_counter() - start}")
 
     # Cleaning
-    logger.info(f"Cleaning Starting...")
+    combined_logger.info(f"Cleaning Starting...")
     cleaning_start_time = perf_counter()
     clean_data = tr.clean(data)
-    logger.info(f"Cleaning Done! Time taken: {perf_counter() - cleaning_start_time} seconds | Total time elapsed: {perf_counter() - start}")
+    combined_logger.info(f"Cleaning Done! Time taken: {perf_counter() - cleaning_start_time} seconds | Total time elapsed: {perf_counter() - start}")
 
     # Uploading
-    logger.info(f"Uploading to csv file...")
+    combined_logger.info(f"Uploading to csv file...")
     upload(clean_data)
 
-    logger.info(f"Process Done! Total time elapsed: {perf_counter() - start} seconds.")
+    combined_logger.info(f"Process Done! Total time elapsed: {perf_counter() - start} seconds.")
