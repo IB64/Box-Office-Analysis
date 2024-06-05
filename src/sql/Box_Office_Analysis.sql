@@ -128,12 +128,13 @@ ORDER BY season;
 
 
 #avg daily bo for the last 24 years
-EXTRACT(MONTH FROM date) as month,
-EXTRACT(DAY FROM date) as day,
-round(avg(daily),1) as avg_daily_BO
-from `chrome-folio-405910.Box_Office_Analysis_Project.Clean_Data_Box_Office`
-group by 1,2
-order by 1, 2
+SELECT
+    EXTRACT(MONTH FROM date) AS month,
+    EXTRACT(DAY FROM date) AS day,
+    ROUND(SUM(daily) / COUNT(DISTINCT EXTRACT(YEAR FROM date)), 1) AS avg_daily_BO
+FROM `chrome-folio-405910.Box_Office_Analysis_Project.Clean_Data_Box_Office`
+GROUP BY month, day
+ORDER BY month, day;
 
 
 #film drops in BO bsed on week
